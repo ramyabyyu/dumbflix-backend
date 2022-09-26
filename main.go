@@ -20,9 +20,7 @@ func main() {
 	if errEnv != nil {
 		panic("Failed to load env file")
 	}
-
 	
-
 	// Database Init
 	mysql.DatabaseInit()
 
