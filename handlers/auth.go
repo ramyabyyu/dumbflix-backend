@@ -116,7 +116,7 @@ func (h *handlerAuth) Register(w http.ResponseWriter, r *http.Request) {
 	claims["isActive"] = data.Profile.IsActive
 	claims["exp"] = time.Now().Add(time.Hour * 2).Unix() // 2 hours expired
 
-	fmt.Println(claims)
+	// fmt.Println(claims)
 
 	// fmt.Println(data.ID)
 

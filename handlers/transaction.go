@@ -223,8 +223,6 @@ func SendMail(status string, transaction models.Transaction) {
 func (h *handlerTransaction) Notification(w http.ResponseWriter, r *http.Request) {
 	var notificationPayload map[string]interface{}
 
-	fmt.Println("Text Notification 1")
-
 	err := json.NewDecoder(r.Body).Decode(&notificationPayload)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -233,16 +231,12 @@ func (h *handlerTransaction) Notification(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	fmt.Println("Text Notification 2")
-
 
 	transactionStatus := notificationPayload["transaction_status"].(string)
 	fraudStatus := notificationPayload["fraud_status"].(string)
 	orderId := notificationPayload["order_id"].(string)
 
 	transaction, _ := h.TransactionRepository.GetOneTransaction(orderId)
-
-	fmt.Println("Text Notification 3")
 
 	if transactionStatus == "capture" {
 		if fraudStatus == "challenge" {

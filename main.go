@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -50,7 +49,8 @@ func main() {
 	var allowedOrigins = handlers.AllowedOrigins([]string{"*"})
 
 	// port
-	var port = os.Getenv("PORT");
+	// var port = os.Getenv("PORT");
+	var port = "8080"
 
 	fmt.Println("Starting API server localhost:"+port)
 	http.ListenAndServe(":" + port, handlers.CORS(allowedHeaders, allowedMethods, allowedOrigins)(r))
