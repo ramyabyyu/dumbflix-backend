@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"dumbflix/models"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -26,12 +27,22 @@ func (r *repositoryFilm) FindFilm() ([]models.Film, error) {
 	var films []models.Film
 	err := r.db.Debug().Find(&films).Error
 
+	fmt.Println("===films===")
+	fmt.Println(films)
+	fmt.Println("===films===")
+	fmt.Print("\n")
+
 	return films, err
 }
 
 func (r *repositoryFilm) GetFilm(slug string) (models.Film, error) {
 	var film models.Film
 	err := r.db.First(&film, "slug=?", slug).Error
+
+	fmt.Println("===filmDetail===")
+	fmt.Println(film)
+	fmt.Println("===filmDetail===")
+	fmt.Print("\n")
 
 	return film, err
 }
