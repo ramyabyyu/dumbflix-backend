@@ -67,7 +67,7 @@ func UploadFile(next http.HandlerFunc) http.HandlerFunc {
 
 		// Create a temporary file within our temp-images directory that follows
 		// a particular naming pattern
-		tempFile, err := ioutil.TempFile("Uploads", "image-*.png")
+		tempFile, err := ioutil.TempFile("uploads", "image-*.png")
 		if err != nil {
 			fmt.Println(err)
 			fmt.Println("path upload error")
