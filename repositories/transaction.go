@@ -24,7 +24,7 @@ func RepositoryforTransaction(db *gorm.DB) *repository {
 
 func (r *repository) FindTransactions() ([]models.Transaction, error) {
 	var transactions []models.Transaction
-	err := r.db.Find(&transactions).Error
+	err := r.db.Preload("User").Find(&transactions).Error
 
 	return transactions, err
 }
@@ -59,7 +59,7 @@ func (r *repository) UpdateTransaction(status string, ID string) (error) {
 		// user.Profile.IsActive = true
 		// r.db.Save(&user)
 		var profile models.Profile
-		r.db.Debug().First(&profile, "user_id=?", transaction.User.ID)
+		r.db.First(&profile, "user_id=?", transaction.User.ID)
 		profile.IsActive = true
 		r.db.Save(&profile)
 

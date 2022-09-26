@@ -53,6 +53,7 @@ func (h *handlerTransaction) FindTransactions(w http.ResponseWriter, r *http.Req
 			DueDate: transaction.DueDate,
 			Attache: filePath + transaction.Attache,
 			Status: transaction.Status,
+			Email: transaction.User.Email,
 		})
 	}
 
@@ -64,6 +65,10 @@ func (h *handlerTransaction) FindTransactions(w http.ResponseWriter, r *http.Req
 func (h *handlerTransaction) CreateTransaction(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
+	// // Get file name
+	// dataContext := r.Context().Value("dataFile")
+	// filename := dataContext.(string)
+
 	userId, _ := strconv.Atoi(r.FormValue("user_id"))
 	request := transactionsdto.TransactionRequest{
 		UserID: int(userId),
@@ -71,10 +76,6 @@ func (h *handlerTransaction) CreateTransaction(w http.ResponseWriter, r *http.Re
 			Email: r.FormValue("email"),
 		},
 	}
-
-	// Get file name
-	// dataContext := r.Context().Value("dataFile")
-	// filename := dataContext.(string)
 
 	// request := transactionsdto.TransactionRequest{
 	// 	Attache: r.FormValue("file"),
@@ -112,7 +113,7 @@ func (h *handlerTransaction) CreateTransaction(w http.ResponseWriter, r *http.Re
 		DueDate:   dueDate,
 		Attache:   "-",
 		Price: 30000,
-		Status:    "Pending",
+		Status:    "pending",
 		UserID:    request.UserID,
 	}
 
